@@ -36,7 +36,9 @@ def round_trip(entry):
         path = tmp.name
     try:
         with open(path, encoding="utf-8") as f:
-            assert f.read() == entry, "write/read-back mismatch"
+            back = f.read()
+        assert back == entry, "write/read-back mismatch"
+        assert len(back) == len(entry), "write/read-back length mismatch"
     finally:
         os.unlink(path)
 
